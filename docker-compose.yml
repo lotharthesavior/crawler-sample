@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  php:
+    build:
+      context: docker/laravel/php
+    container_name: ${DOCKER_APP}-php
+    volumes:
+      - ./app:/var/www/html
+    expose:
+      - 9000
+      - 8000
+#    environment:
+#      XDEBUG_CONFIG: remote_host=host.docker.internal
+    networks:
+      - crawler-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: ${DOCKER_APP}-nginx
+    expose:
+      - "80"
+    ports:
+      - "8080:80"
+      - "8181:81"
+    volumes:
+      - ./app:/var/www/html
+      - ./docker/laravel/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - crawler-network
+
+networks:
+  crawler-network:
+    driver: bridge
