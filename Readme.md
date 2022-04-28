@@ -17,17 +17,31 @@ There are 2 main classes: to do the job:
 
 ## Usage
 
+**Step 1**
+
 With composer installed in the environment, execute:
 
 ```shell
 composer install
 ```
 
+**Step 2**
+
 With npm installed in the environment, execute:
 
 ```shell
 npm install && npm run prod
 ```
+
+**Step 3**
+
+Here you just add the url for your crawler at the config:
+
+```
+URL_FOR_CRAWLER='https://my-url.com'
+```
+
+**Step 4**
 
 Once you have the webserver running you can access the correspondent page in the browser.
 
